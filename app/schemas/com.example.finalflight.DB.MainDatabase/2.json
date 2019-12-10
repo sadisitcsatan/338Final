@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "fb635f869a0d2d714fb3d23518df700f",
+    "identityHash": "38d83ada52b0f12b31ba6565b6f4acff",
     "entities": [
       {
         "tableName": "Flights",
@@ -135,11 +135,49 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "Reservations",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mResId` INTEGER NOT NULL, `mFlightName` TEXT, `mSeats` INTEGER NOT NULL, `mUser` TEXT, PRIMARY KEY(`mResId`))",
+        "fields": [
+          {
+            "fieldPath": "mResId",
+            "columnName": "mResId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mFlightName",
+            "columnName": "mFlightName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mSeats",
+            "columnName": "mSeats",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mUser",
+            "columnName": "mUser",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "mResId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"fb635f869a0d2d714fb3d23518df700f\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"38d83ada52b0f12b31ba6565b6f4acff\")"
     ]
   }
 }

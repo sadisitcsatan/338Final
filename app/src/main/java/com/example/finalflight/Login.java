@@ -1,5 +1,6 @@
 package com.example.finalflight;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -44,7 +45,7 @@ public class Login extends AppCompatActivity {
         if (mUse != null) {
             //mResullt.setText("mUse is not null");
             //mResullt.setText(mUse.toString());
-            if (mUse.getPassword().equals(password) && mUse.isAdmin()){
+            if (mUse.getPassword().equals(password)){
                 //cahnge intent
                 SharedPreferences pref = this.getSharedPreferences("MyPref",0);
                 SharedPreferences.Editor editor = pref.edit();
@@ -53,6 +54,9 @@ public class Login extends AppCompatActivity {
                 editor.commit();
                 String output = "Successfully Logged In";
                 Toast.makeText(this,output,Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Login.this,Flights.class);
+                startActivity(intent);
+                return;
             }else {
                 mResullt.setText("Invalid Username or password");
             }
