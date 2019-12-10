@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Final</string>
+    <string name="red"><font size="20"><b>Login</b></font></string>
+    <string name="green"><font size="20"><b>Maintain</b></font></string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="sign">Sign up</string>
+    <string name="empty"></string>
+    <string name="key">loggedin</string>
+    <string name="add">Add Flight</string>
+    <string name="departureT">Departure Time</string>
+    <string name="departure">Departure Location</string>
+    <string name="arrival">Arrival Location</string>
+    <string name="flightId">Id</string>
+    <string name="cost">Cost</string>
+    <string name="pick_time">Set time</string>
+    <string name="pick_date">Set date</string>
+</resources>
