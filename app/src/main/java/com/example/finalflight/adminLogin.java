@@ -28,8 +28,8 @@ public class adminLogin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_login);
-        wrong = 0;
-        mResullt = findViewById(R.id.resullt);
+        wrong =(int) 0;
+        mResullt = findViewById(R.id.ress);
         mUserDao = Room.databaseBuilder(this, MainDatabase.class, MainDatabase.dbName)
                 .allowMainThreadQueries()
                 .build()
@@ -42,7 +42,9 @@ public class adminLogin extends AppCompatActivity {
     public void enter(View view){
         String username = mUsername.getText().toString();
         String password = mPassword.getText().toString();
-        mUse = mUserDao.getUser(username);
+        if (!username.equals("") && !password.equals("")) {
+            mUse = mUserDao.getUser(username);
+        }
 
         if (mUse != null) {
             //mResullt.setText("mUse is not null");
@@ -58,10 +60,6 @@ public class adminLogin extends AppCompatActivity {
                 Intent intent = new Intent(adminLogin.this,AdminHome.class);
                 startActivity(intent);
                 return;
-            }else if (wrong >= 3){
-                Intent intent = new Intent(adminLogin.this,MainActivity.class);
-                startActivity(intent);
-                return;
             }else{
                 mResullt.setText("Invalid Username or password");
                 wrong++;
@@ -69,6 +67,11 @@ public class adminLogin extends AppCompatActivity {
         }else{
             wrong++;
             mResullt.setText("Invalid Username or password");
+        }
+        if (wrong >= 3){
+            Intent intent = new Intent(adminLogin.this,MainActivity.class);
+            startActivity(intent);
+            return;
         }
     }
 }

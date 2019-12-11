@@ -87,13 +87,13 @@ public class Flight {
 
     @Override
     public String toString() {
-        return "Flight" +
-                " " + mFlightName +
-                ", Flight Departure='" + mFlightDeparture + '\'' +
-                ", Flight Arrival='" + mFlightArrival + '\'' +
-                ", Seats=" + mSeats +
-                ", Cost=" + mCost +
-                ", DepartureTime=" + mDepartureTime +
+        return " Flight" +
+                " ." + mFlightName +
+                ",\n Flight Departure='" + mFlightDeparture + '\'' +
+                ",\n Flight Arrival='" + mFlightArrival + '\'' +
+                ",\n Seats=" + mSeats +
+                ",\n Cost=" + mCost +
+                ",\n DepartureTime=" + mDepartureTime +
                 ' ';
     }
 }

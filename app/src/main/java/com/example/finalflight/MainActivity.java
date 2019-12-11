@@ -27,11 +27,20 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences pref = this.getSharedPreferences("MyPref",0);
         SharedPreferences.Editor editor = pref.edit();
         editor.clear();
-
         login = findViewById(R.id.login);
         maintain =findViewById(R.id.maintain);
         signup = findViewById(R.id.sign);
-
+        muserDelete = Room.databaseBuilder(this,MainDatabase.class,MainDatabase.dbName)
+                .allowMainThreadQueries()
+                .build()
+                .getUserDao();
+        if (muserDelete.getUser("admin2") != null){
+            User getAdmin = muserDelete.getUser("admin2");
+            if (!getAdmin.isAdmin()) {
+                getAdmin.setAdmin(true);
+                muserDelete.update(getAdmin);
+            }
+        }
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){

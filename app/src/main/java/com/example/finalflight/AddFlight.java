@@ -122,10 +122,10 @@ public class AddFlight extends AppCompatActivity {
         }else if (Integer.parseInt(mSeats.getText().toString()) == 0 ){
             mRez.setText("Invalid Seats");
             return false;
-        }else if(Integer.parseInt(mHour.getText().toString()) <= 0 || Integer.parseInt(mHour.getText().toString()) > 24){
+        }else if(Integer.parseInt(mHour.getText().toString()) < 0 || Integer.parseInt(mHour.getText().toString()) > 24){
             mRez.setText("Invalid Hour");
             return false;
-        }else if (Integer.parseInt(mMinute.getText().toString()) <= 0 || Integer.parseInt(mMinute.getText().toString()) > 60){
+        }else if (Integer.parseInt(mMinute.getText().toString()) < 0 || Integer.parseInt(mMinute.getText().toString()) > 60){
             mRez.setText("Invalid Minute");
             return false;
         }else if (Integer.parseInt(mDay.getText().toString()) <= 0 || Integer.parseInt(mDay.getText().toString()) > 31){
@@ -139,7 +139,7 @@ public class AddFlight extends AppCompatActivity {
             return false;
         }
         int id = Integer.parseInt(mId.getText().toString());
-        if (mFlightDao.getFlight(id) == null) {
+        if (mFlightDao.getFlight(id) != null) {
             mRez.setText("Id taken");
             res = false;
         }

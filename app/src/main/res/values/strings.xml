@@ -15,4 +15,6 @@
     <string name="cost">Cost</string>
     <string name="pick_time">Set time</string>
     <string name="pick_date">Set date</string>
+    <string name="confirm">Confirm</string>
+    <string name="ok">Ok</string>
 </resources>

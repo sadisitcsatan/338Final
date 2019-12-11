@@ -57,7 +57,7 @@ public class Logs {
     @Override
     public String toString() {
         return "" + mTime +
-                ", User='" + mUser + '\'' +
+                ",\n User='" + mUser + '\'' +
                 ", '" + mAction + '\'';
     }
 }

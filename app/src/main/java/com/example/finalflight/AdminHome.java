@@ -49,6 +49,8 @@ public class AdminHome extends AppCompatActivity {
             StringBuilder stringBuilder = new StringBuilder();
             for (Logs log : mLogs){
                 stringBuilder.append(log);
+                stringBuilder.append('\n');
+                stringBuilder.append('\n');
             }
             mMainLog.setText(stringBuilder.toString());
         }else {
