@@ -59,7 +59,14 @@ public class Flights extends AppCompatActivity {
                 .getFlightDao();
         refreshDisplay();
         checkReserves();
-
+        mCancell.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(Flights.this,Cancellation.class);
+                startActivity(intent1);
+                return;
+            }
+        });
     }
     private void refreshDisplay(){
         mFlights = mFlightDao.getFlights();
@@ -84,14 +91,14 @@ public class Flights extends AppCompatActivity {
             if (mReserve.isEmpty()){
                 mCancell.setVisibility(View.GONE);
             }else {
-                mSearchres.setText("Not empty");
+                //mSearchres.setText("Not empty");
                 StringBuilder stringBuilder = new StringBuilder();
                 for (Reservation reservation : mReserve){
                     stringBuilder.append(reservation);
                     stringBuilder.append('\n');
                     stringBuilder.append('\n');
                 }
-                mSearchres.setText(stringBuilder.toString());
+                //mSearchres.setText(stringBuilder.toString());
             }
             return;
         }

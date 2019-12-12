@@ -70,7 +70,7 @@ public class Reserve extends AppCompatActivity {
             int seats = Integer.parseInt(mSeats.getText().toString());
             if(seats >= 0 && seats <= reserve.getSeats()){
                 float total = reserve.getCost() * seats;
-                mPut = new Reservation(username,reserve.getFlightName(),seats);
+                mPut = new Reservation(username,reserve.getFlightName(),seats,total);
                 reserve.setSeats(reserve.getSeats()-seats);
                 mFlightDao.update(reserve);
                 mReserveDao.insert(mPut);

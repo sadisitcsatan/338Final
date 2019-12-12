@@ -88,7 +88,7 @@ public class Flight {
     @Override
     public String toString() {
         return " Flight" +
-                " ." + mFlightName +
+                " " + mFlightName +
                 ",\n Flight Departure='" + mFlightDeparture + '\'' +
                 ",\n Flight Arrival='" + mFlightArrival + '\'' +
                 ",\n Seats=" + mSeats +

@@ -1,5 +1,6 @@
 package com.example.finalflight;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.example.finalflight.DB.LogsDao;
 import com.example.finalflight.DB.MainDatabase;
 
 import java.util.Date;
+
+import dalvik.system.InMemoryDexClassLoader;
 
 public class AddFlight extends AppCompatActivity {
     EditText mId;
@@ -93,7 +96,7 @@ public class AddFlight extends AppCompatActivity {
         month = month-1;
         int year = Integer.parseInt(mYear.getText().toString());
         int minute = Integer.parseInt(mMinute.getText().toString());
-        Date cDate = new Date(year,month,day,hour,minute);
+        Date cDate = new Date(year-1900,month,day,hour,minute);
         SharedPreferences pref = this.getSharedPreferences("MyPref",0);
         SharedPreferences.Editor editor = pref.edit();
         String currentUser = pref.getString("Username",null);
@@ -102,8 +105,9 @@ public class AddFlight extends AppCompatActivity {
         mLogsDao.insert(loging);
         mFlightDao.insert(newFlight);
         Toast.makeText(this,"Successfully added Flight",Toast.LENGTH_SHORT);
-        finish();
-        startActivity(getIntent());
+        Intent intent = new Intent(AddFlight.this,AdminHome.class);
+        startActivity(intent);
+        return;
     }
     private boolean isValid(){
         boolean res = true;
@@ -119,23 +123,38 @@ public class AddFlight extends AppCompatActivity {
         }else if (mCost.getText().toString().equals("") || Float.parseFloat(mCost.getText().toString()) <= 0.0) {
             mRez.setText("Invalid Cost");
             return false;
-        }else if (Integer.parseInt(mSeats.getText().toString()) == 0 ){
+        }else if (mSeats.getText().toString().equals("")){
             mRez.setText("Invalid Seats");
             return false;
-        }else if(Integer.parseInt(mHour.getText().toString()) < 0 || Integer.parseInt(mHour.getText().toString()) > 24){
+        }else if(mHour.getText().toString().equals("")){
             mRez.setText("Invalid Hour");
             return false;
-        }else if (Integer.parseInt(mMinute.getText().toString()) < 0 || Integer.parseInt(mMinute.getText().toString()) > 60){
+        }else if (mMinute.getText().toString().equals("")){
             mRez.setText("Invalid Minute");
             return false;
-        }else if (Integer.parseInt(mDay.getText().toString()) <= 0 || Integer.parseInt(mDay.getText().toString()) > 31){
+        }else if (mDay.getText().toString().equals("")){
             mRez.setText("Invalid Day");
             return false;
-        }else if (Integer.parseInt(mMonth.getText().toString()) <= 0 || Integer.parseInt(mMonth.getText().toString()) > 12){
+        }else if (mMonth.getText().toString().equals("")){
             mRez.setText("Invalid Month");
             return false;
-        }else if (Integer.parseInt(mYear.getText().toString()) <= 2018){
+        }else if (Integer.parseInt(mYear.getText().toString()) <= 2019){
             mRez.setText("Invalid Year");
+            return false;
+        }else if (Integer.parseInt(mSeats.getText().toString()) <= 0){
+            mRez.setText("Invalid Seats");
+            return false;
+        }else if(Integer.parseInt(mHour.getText().toString()) < 0 || Integer.parseInt(mHour.getText().toString()) > 24) {
+            mRez.setText("Invalid Hour");
+            return false;
+        }else if (Integer.parseInt(mMinute.getText().toString()) < 0 || Integer.parseInt(mMinute.getText().toString()) > 60) {
+            mRez.setText("Invalid Minute");
+            return false;
+        }else if (Integer.parseInt(mDay.getText().toString()) <= 0 || Integer.parseInt(mDay.getText().toString()) > 31) {
+            mRez.setText("Invalid Day");
+            return false;
+        }else if (Integer.parseInt(mDay.getText().toString()) <= 0 || Integer.parseInt(mDay.getText().toString()) > 31) {
+            mRez.setText("Invalid Day");
             return false;
         }
         int id = Integer.parseInt(mId.getText().toString());

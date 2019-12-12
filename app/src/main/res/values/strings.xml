@@ -17,4 +17,9 @@
     <string name="pick_date">Set date</string>
     <string name="confirm">Confirm</string>
     <string name="ok">Ok</string>
+    <string name="search">Search</string>
+    <string name="reserveSeat">Reserve Seat</string>
+    <string name="cancelRes">Cancel Reservation</string>
+    <string name="cancel">Cancel</string>
+    <string name="no">No</string>
 </resources>

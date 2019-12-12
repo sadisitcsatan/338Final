@@ -26,4 +26,6 @@ public interface ReservationDao {
     List<Reservation> getReservations();
     @Query("SELECT * FROM "+MainDatabase.RESERVATION_TABLE+" WHERE mUser = :user")
     List<Reservation> getUsersReservations(String user);
+    @Query("SELECT * FROM "+MainDatabase.RESERVATION_TABLE+" WHERE mUser = :user AND mFlightName = :flight")
+    Reservation getUserResrvation(String user,String flight);
 }

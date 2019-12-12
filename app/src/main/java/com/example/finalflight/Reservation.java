@@ -13,12 +13,22 @@ public class Reservation {
     private String mFlightName;
     private int mSeats;
     private String mUser;
+    private float mTotal;
 
-    public Reservation(String mUser, String mFlightName , int mSeats){
+    public Reservation(String mUser, String mFlightName , int mSeats, float mTotal){
         this.mUser = mUser;
         this.mFlightName = mFlightName;
         this.mSeats = mSeats;
+        this.mTotal = mTotal;
 
+    }
+
+    public float getTotal() {
+        return mTotal;
+    }
+
+    public void setTotal(float mTotal) {
+        this.mTotal = mTotal;
     }
 
     public int getResId() {
@@ -55,9 +65,10 @@ public class Reservation {
 
     @Override
     public String toString() {
-        return "Reservation" +
+        return "Reservation: \n" +
                 "" + mUser + '\'' +
-                ", Flight" + mFlightName +
-                ", Seats='" + mSeats + '\'';
+                ",\n Flight: " + mFlightName +
+                ",\n Seats='" + mSeats + '\''+
+                ",\n Total Cost= $"+ mTotal;
     }
 }
