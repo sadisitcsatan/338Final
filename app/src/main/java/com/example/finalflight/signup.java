@@ -47,7 +47,7 @@ public class signup extends AppCompatActivity {
             public void onClick(View view) {
                 if (valid()){
                     submitUser();
-                    Toast.makeText(signup.this,"Account Successfully Created",Toast.LENGTH_LONG);
+                    Toast.makeText(signup.this,"Account Successfully Created",Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(signup.this,MainActivity.class);
                     startActivity(intent);
                 }
@@ -59,12 +59,12 @@ public class signup extends AppCompatActivity {
         String username = mUsername.getText().toString();
         String password = mPassword.getText().toString();
         boolean result = true;
-        if (username.equals("") || username.length() < 5){
+        if (username.equals("") || !count(username)){
             result = false;
             mResult.setText("Username is invalid");
-        }else if (count(password)){
+        }else if (password.equals("") || !count(password)){
             result = false;
-            mResult.setText("Password requires 3 letters and 3 numbers");
+            mResult.setText("Password requires 3 letters and 1 number");
         }else if (mUserDao.getUser(username) != null){
             result = false;
             mResult.setText("Username already taken");
@@ -100,9 +100,9 @@ public class signup extends AppCompatActivity {
             }
 
         }
-        if (letter < 3 || num < 2) {
+        if (letter < 3 || num < 1) {
             res = false;
-        } else if (space == 0) {
+        } else if (space != 0) {
             res = false;
         }
         return res;

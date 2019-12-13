@@ -66,16 +66,35 @@ public class Reserve extends AppCompatActivity {
         mFlightData.setText(reserve.toString());
     }
     public void confirm(View view){
+        mReserveDao = Room.databaseBuilder(this,MainDatabase.class,MainDatabase.dbName)
+                .allowMainThreadQueries()
+                .build()
+                .getReservationDao();
         if (!mSeats.getText().toString().equals("")){
             int seats = Integer.parseInt(mSeats.getText().toString());
-            if(seats >= 0 && seats <= reserve.getSeats()){
+            if(seats >= 0 && seats <= reserve.getSeats() && seats <= 7){
                 float total = reserve.getCost() * seats;
+                Log.d("DEBUG","making reservation");
                 mPut = new Reservation(username,reserve.getFlightName(),seats,total);
+                Log.d("DEBUG","made reservation");
+                Log.d("DEBUG","changing seats");
                 reserve.setSeats(reserve.getSeats()-seats);
+                Log.d("DEBUG","changed seats");
+                Log.d("DEBUG","updating flights");
+                Log.d("DEBUG",reserve.toString());
                 mFlightDao.update(reserve);
+                Log.d("DEBUG","updated flights");
+                Log.d("DEBUG","inserting reservation");
+                Log.d("DEBUG",mPut.toString());
                 mReserveDao.insert(mPut);
+                Log.d("DEBUG","inserted");
+                Log.d("DEBUG","making Log");
                 mLog = new Logs(username,"Reserved "+seats+" for flight "+reserve.getFlightName()+" \n Cost: $"+ total);
+                Log.d("DEBUG","made log");
+                Log.d("DEBUG","inserting log");
+                Log.d("DEBUG",mLog.toString());
                 mLogDao.insert(mLog);
+                Log.d("DEBUG","inserted");
                 new AlertDialog.Builder(this)
                         .setTitle("Reserving "+seats +" from Flight,")
                         .setMessage(reserve.toString()+ " \n Total Cost: $"+ total)

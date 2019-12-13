@@ -10,8 +10,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import com.example.finalflight.DB.FlightDao;
 import com.example.finalflight.DB.MainDatabase;
 import com.example.finalflight.DB.UserDao;
+
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     Button login;
@@ -19,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     TextView signup;
 
     UserDao muserDelete;
+    FlightDao mFlightDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +38,51 @@ public class MainActivity extends AppCompatActivity {
                 .allowMainThreadQueries()
                 .build()
                 .getUserDao();
+        if (muserDelete.getUsers().isEmpty()){
+            //Generating users based on empty user table ie first launch
+            User admin = new User("admin2","admin2");
+            User u1 = new User("alice5","csumb100");
+            User u2 = new User("brian77","123ABC");
+            User u3 = new User("chris21","CHRIS21");
+            muserDelete.insert(u1);
+            muserDelete.insert(u2);
+            muserDelete.insert(u3);
+            muserDelete.insert(admin);
+        }
         if (muserDelete.getUser("admin2") != null){
             User getAdmin = muserDelete.getUser("admin2");
             if (!getAdmin.isAdmin()) {
                 getAdmin.setAdmin(true);
                 muserDelete.update(getAdmin);
             }
+        }
+        mFlightDao = Room.databaseBuilder(this,MainDatabase.class,MainDatabase.dbName)
+                .allowMainThreadQueries()
+                .build()
+                .getFlightDao();
+        if (mFlightDao.getFlights().isEmpty()){
+            //generate stock flights
+            Date temp = new Date();
+            temp.setMonth(12);
+            temp.setYear(2019);
+            temp.setDate(16);
+            temp.setHours(10);
+            temp.setMinutes(00);
+            Flight one = new Flight(101,"Monterey","Los Angeles",10,150,temp);
+            temp.setHours(13);
+            temp.setMinutes(0);
+            Flight two = new Flight(102,"Los Angeles","Monterey",10,150,temp);
+            temp.setHours(11);
+            Flight three = new Flight(201,"Monterey","Seattle",5,(float)200.5,temp);
+            temp.setHours(15);
+            Flight four = new Flight(205,"Monterey","Seattle",15,150,temp);
+            temp.setHours(14);
+            Flight five = new Flight(202,"Seattle","Monterey",5,(float)200.50,temp);
+            mFlightDao.insert(one);
+            mFlightDao.insert(two);
+            mFlightDao.insert(three);
+            mFlightDao.insert(four);
+            mFlightDao.insert(five);
         }
         login.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,6 +49,7 @@ public class Flights extends AppCompatActivity {
         mArrival = findViewById(R.id.arrive);
         mResname = findViewById(R.id.flightName);
         mFlightLog = findViewById(R.id.flighLog);
+        mFlightLog.setMovementMethod(new ScrollingMovementMethod());
         mSearchres = findViewById(R.id.searchRes);
         mReservDao = Room.databaseBuilder(this,MainDatabase.class,MainDatabase.dbName)
                 .allowMainThreadQueries()
@@ -115,6 +117,7 @@ public class Flights extends AppCompatActivity {
                 for (Flight flight : mFlights){
                     stringBuilder.append(flight);
                     stringBuilder.append('\n');
+                    stringBuilder.append('\n');
                 }
                 print = stringBuilder.toString();
                 if (stringBuilder.toString().equals("")){
@@ -127,6 +130,7 @@ public class Flights extends AppCompatActivity {
                 for (Flight flight : mFlights){
                     stringBuilder.append(flight);
                     stringBuilder.append('\n');
+                    stringBuilder.append('\n');
                 }
                 print = stringBuilder.toString();
                 if (stringBuilder.toString().equals("")){
@@ -138,6 +142,7 @@ public class Flights extends AppCompatActivity {
                 StringBuilder stringBuilder = new StringBuilder();
                 for (Flight flight : mFlights){
                     stringBuilder.append(flight);
+                    stringBuilder.append('\n');
                     stringBuilder.append('\n');
                 }
                 print = stringBuilder.toString();

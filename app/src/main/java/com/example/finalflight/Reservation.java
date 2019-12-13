@@ -8,7 +8,7 @@ import com.example.finalflight.DB.MainDatabase;
 @Entity(tableName = MainDatabase.RESERVATION_TABLE)
 public class Reservation {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int mResId;
     private String mFlightName;
     private int mSeats;

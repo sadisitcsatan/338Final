@@ -2,6 +2,7 @@ package com.example.finalflight;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ public class AdminHome extends AppCompatActivity {
         setContentView(R.layout.activity_admin_home);
         mMainLog = (TextView) findViewById(R.id.mainLog);
         mAddFlight = (Button) findViewById(R.id.addFlight);
+        mMainLog.setMovementMethod(new ScrollingMovementMethod());
         mLogDao = Room.databaseBuilder(this, MainDatabase.class, MainDatabase.dbName)
                 .allowMainThreadQueries()
                 .build()
